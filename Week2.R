@@ -41,3 +41,51 @@ managers
 str(managers)
 
 summary(managers)
+
+# Recode AgeCat to make it 
+# ordinal and factored
+age_cat <- factor(managers$AgeCat,
+                 order=TRUE,
+                 levels = c("Young", "Middle Aged", "Elder"))
+
+# Replace managers AgeCat
+# with a newly factored variable
+managers$AgeCat <- age_cat
+str(managers)
+managers
+
+#create a new col called summary_col
+# that contains summary of each row
+# and then create a new col called
+# mean_value to contain means of the answers
+summary_col <- managers$Q1 + 
+               managers$Q2 + 
+               managers$Q3 + 
+               managers$Q4 + 
+               managers$Q5
+
+summary_col
+
+#Add to managers
+# overwriting old managers dataframe 
+# with a new dataframe called the same name
+managers <- data.frame(managers, summary_col)
+managers
+
+# And then create a new col
+# called mean_value to contain means of the answer
+# rowmeans()
+managers$mean_val <- rowMeans(x=managers[5:9])
+managers
+
+# Rename summary_col to summary and mean_val to mean
+names(managers)[11] <- "summary"
+names(managers)[12] <- "mean"
+managers
+
+str(managers)
+
+# convert date structure
+managers$Date <- as.Date(managers$Date, "%Y-%d-%m")
+managers
+str(managers)
