@@ -77,7 +77,7 @@ str(managers)
 # without first converting to a character variable
 # from the default factor variable
 date_field   <- as.character(managers$Date)
-new_date <- as.Date(date_field, "%Y/%d/%m")
+new_date <- as.Date(date_field, "%Y-%m-%d")
 str(new_date)
 
 # Now overwrite the contents of the date field with new date structure
