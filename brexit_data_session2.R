@@ -185,4 +185,54 @@ barplot(height = prop.table(table(brexit_data$RegionName)),
         ylab = "Frequency", 
         xlab = "Region",
         col = "white")
+# Create a plot to show differences in qualifications
 
+# Use this as an example
+hist(brexit_data$MeanAge, main = "Histogram for mean adult age(years)")
+
+opar <- par(no.readonly = TRUE)
+par(mfrow = c(1,2))
+
+hist(brexit_data$NoQuals, 
+     main = "Histogram for no qualifications", 
+     xlab = "% of residents")
+
+hist(brexit_data$L4Quals_plus, 
+     main = "Histogram for degree level qualification and above",
+     xlab = "% of residents")
+
+# Reset opar
+par(opar)
+
+opar <- par(no.readonly = TRUE)
+par(mfrow = c(1,2))
+
+plot(x = brexit_data$NoQuals,
+     y = brexit_data$AdultMeanAge,
+     xlab = "No quals",
+     ylab = "Adult mean age")
+
+plot(x = brexit_data$L4Quals_plus,
+     y = brexit_data$AdultMeanAge,
+     xlab = "Degree and above quals",
+     ylab = "Adult mean age")
+
+par(opar)
+
+# examine the data in more detail
+variables_of_intereset <- c("AdultMeanAge",
+                            "Owned",
+                            "NoQuals",
+                            "L4Quals_plus",
+                            "Unemp",
+                            "HigherOccup",
+                            "Deprived",
+                            "Proportion")
+pairs(brexit_data[variables_of_intereset])
+
+install.packages("corrplot")
+library(corrplot)
+corrplot(corr = cor(numerical_data), 
+         t1.col = "Black",
+         method = "number",
+         t1.cex = 0.9)
