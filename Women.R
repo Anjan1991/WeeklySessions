@@ -52,3 +52,49 @@ summary(simple_linear_model)
 # Overall significance of the model.
 # a large F statistic corresponds to a significant p-value
 # (p< 0.05)
+
+# Build a model to predict distance from speed
+# Using the cars data set
+
+# 1st step - check model assumptions
+# These are the core assumptions
+# Linearity among the variables
+# Normality - Normal distribution
+# No Co-linearity - vars are not a linear combination of others
+# Independence - residuals are independent and not correlated
+
+# Check linearity first using the scatter plot
+# X-axis = independent variable
+# y-axis = dependent variable
+# If relationship exists then the linearity assumption is validated
+
+scatter.smooth(x = cars$speed,
+               y = cars$dist,
+               main = "Distance ~ speed",
+               xlab = "car speed (mph)",
+               ylab = "stopping distance")
+
+cor(cars$speed, cars$dist)
+
+# check for outliers
+# An outlier = 1.5 X interquartile range
+# IQR = distance between 25th and 75th percentile
+# We need to check speed and distance for outliers
+
+opar <- par(no.readonly = TRUE)
+par(mfrow = c(1,2))
+attach(cars)
+boxplot(speed,
+        main = "Speed",
+        sub = paste("Outlier rows: ", boxplot.stats(speed)$out)
+        )
+
+boxplot(dist,
+        main = "Distance",
+        sub = paste("Outlier rows: ", boxplot.stats(dist)$out)
+)
+detach(cars)
+par <- opar
+
+# Remove line 120 because it is an outlier
+cars <- subset(cars, cars$dist != 120)
