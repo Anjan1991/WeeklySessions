@@ -142,9 +142,12 @@ mape
 
 install.packages("DAAG")
 library(DAAG)
+par(mfrow = c(1,1))
 cv_results <- suppressWarnings(CVlm(data = cars,
                                     form.lm = dist ~ speed,
                                     dots = FALSE,
+                                    m = 5,
                                     seed = 1,
+                                    printit = FALSE,
                                     legend.pos = "topleft",
                                     main = "Small symbols are predicted values while bigger ones are actuals"))
