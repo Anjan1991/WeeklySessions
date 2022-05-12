@@ -151,3 +151,9 @@ cv_results <- suppressWarnings(CVlm(data = cars,
                                     printit = FALSE,
                                     legend.pos = "topleft",
                                     main = "Small symbols are predicted values while bigger ones are actuals"))
+
+# Predict a single value form the model
+predicted_data <- data.frame(speed = c(10))
+
+predicted_distance <- predict(linear_model, predicted_data)
+predicted_distance
