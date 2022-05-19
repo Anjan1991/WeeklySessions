@@ -20,3 +20,4 @@ head(states_df)
 # Showing co-linearity for the data set
 states_comparison <- as.data.frame(state.x77)
 pairs(states_comparison)
+
